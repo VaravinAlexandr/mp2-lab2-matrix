@@ -62,16 +62,20 @@ public:
 template <class ValType>
 TVector<ValType>::TVector(int s, int si)
 {
-	if ((s < 0) || (s > MAX_VECTOR_SIZE)) throw "INVALIDE_SIZE";
-	if ((si < 0) || (si > s)) throw "INVALIDE_START_INDEX";
-	
-	Size = s;
-	StartIndex = si;
-	pVector = new ValType [Size];
-	for (int i = StartIndex; i < Size; i++)
+	if ((s > 0) && (s <= MAX_VECTOR_SIZE))
 	{
-		pVector[i] = 0;
+		if (si <= 0) 
+		{
+			Size = s;
+			StartIndex = si;
+			pVector = new ValType [Size];
+		}
+		else
+		throw si ;
 	}
+	else
+	throw s;
+	
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> //конструктор копирования
@@ -93,8 +97,12 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-	if ((pos < StartIndex) || (pos >= Size)) throw "INVALIDE_POSITION";
-	return pVector[pos];
+	if ((pos >= StartIndex) && (pos <= Size)) 
+	{
+		return pVector[pos];
+	}
+	else throw pos;
+	
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // сравнение
@@ -103,7 +111,7 @@ bool TVector<ValType>::operator==(const TVector &v) const
 	bool result = true;
 	if (this == &v) return result;
 	if ((StartIndex != v.StartIndex) || (Size != v.Size)) result = false;
-	else for (int i = StartIndex; i < Size; i++)
+	else for (int i = 0; i < Size; i++)
 	{
 		if (pVector[i] != v.pVector[i]) 
 		{
