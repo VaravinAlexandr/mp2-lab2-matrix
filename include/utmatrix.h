@@ -70,11 +70,9 @@ TVector<ValType>::TVector(int s, int si)
 			StartIndex = si;
 			pVector = new ValType [Size];
 		}
-		else
-		throw si ;
+		else throw si ;
 	}
-	else
-	throw s;
+	else throw s;
 	
 } /*-------------------------------------------------------------------------*/
 
@@ -125,16 +123,38 @@ bool TVector<ValType>::operator==(const TVector &v) const
 template <class ValType> // сравнение
 bool TVector<ValType>::operator!=(const TVector &v) const
 {
+	return ! ( *this == v )
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // присваивание
 TVector<ValType>& TVector<ValType>::operator=(const TVector &v)
 {
+	if (*this != &v)
+	{
+		if (Size != v.Size)
+		{
+			delete[] pVector;
+			pVector = new ValType[v.Size];
+		}
+		Size = v.Size;
+		StartIndex = v.StartIndex; 
+		for (int i = 0; i < Size; i++)
+		{
+			pVector[i]=v.pVector[i];
+		}
+	}
+	return *this;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // прибавить скаляр
 TVector<ValType> TVector<ValType>::operator+(const ValType &val)
 {
+	TVector temp(Size , StartIndex)
+	for (i = 0; i < Size; i++)
+	{
+		temp.pVector[i] = pVector[i] + val;
+	}
+	return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // вычесть скаляр
