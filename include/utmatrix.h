@@ -95,7 +95,7 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-	if ((pos >= StartIndex) && (pos <= Size)) 
+	if ((pos >= 0) && (pos < Size)) 
 	{
 		return pVector[pos];
 	}
@@ -160,26 +160,63 @@ TVector<ValType> TVector<ValType>::operator+(const ValType &val)
 template <class ValType> // вычесть скаляр
 TVector<ValType> TVector<ValType>::operator-(const ValType &val)
 {
+	TVector temp(Size , StartIndex)
+	for (i = 0; i < Size; i++)
+	{
+		temp.pVector[i] = pVector[i] - val;
+	}
+	return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // умножить на скаляр
 TVector<ValType> TVector<ValType>::operator*(const ValType &val)
 {
+	
+	TVector temp(Size , StartIndex)
+	for (i = 0; i < Size; i++)
+	{
+		temp.pVector[i] = pVector[i] * val;
+	}
+	return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // сложение
 TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
 {
+	TVector temp(Size, StartIndex);
+	if (Size == v.Size)
+	{
+		for (int i = 0; i < Size; i++)
+			temp.pVector[i] = pVector[i] + v.pVector[i];
+	}
+	else throw Size;
+	return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // вычитание
 TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
 {
+	TVector temp(Size, StartIndex);
+	if (Size == v.Size)
+	{
+		for (int i = 0; i < Size; i++)
+			temp.pVector[i] = pVector[i] - v.pVector[i];
+	}
+	else throw Size;
+	return temp;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // скалярное произведение
 ValType TVector<ValType>::operator*(const TVector<ValType> &v)
 {
+	ValType temp = 0;
+	if (Size == v.Size)
+	{
+		for (int i = 0; i < Size; i++)
+			temp = temp + pVector[i] * v.pVector[i];
+	}
+	else throw Size;
+	return temp;
 } /*-------------------------------------------------------------------------*/
 
 
