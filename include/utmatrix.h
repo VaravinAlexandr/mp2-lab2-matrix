@@ -149,8 +149,8 @@ TVector<ValType>& TVector<ValType>::operator=(const TVector &v)
 template <class ValType> // прибавить скаляр
 TVector<ValType> TVector<ValType>::operator+(const ValType &val)
 {
-	TVector temp(Size , StartIndex)
-	for (i = 0; i < Size; i++)
+	TVector temp(Size , StartIndex);
+	for (int i = 0; i < Size; i++)
 	{
 		temp.pVector[i] = pVector[i] + val;
 	}
@@ -160,8 +160,8 @@ TVector<ValType> TVector<ValType>::operator+(const ValType &val)
 template <class ValType> // вычесть скаляр
 TVector<ValType> TVector<ValType>::operator-(const ValType &val)
 {
-	TVector temp(Size , StartIndex)
-	for (i = 0; i < Size; i++)
+	TVector temp(Size , StartIndex);
+	for (int i = 0; i < Size; i++)
 	{
 		temp.pVector[i] = pVector[i] - val;
 	}
@@ -172,8 +172,8 @@ template <class ValType> // умножить на скаляр
 TVector<ValType> TVector<ValType>::operator*(const ValType &val)
 {
 	
-	TVector temp(Size , StartIndex)
-	for (i = 0; i < Size; i++)
+	TVector temp(Size , StartIndex);
+	for (int i = 0; i < Size; i++)
 	{
 		temp.pVector[i] = pVector[i] * val;
 	}
