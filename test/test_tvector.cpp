@@ -31,18 +31,24 @@ TEST(TVector, can_create_copied_vector)
 
 TEST(TVector, copied_vector_is_equal_to_source_one)
 {
-  TVector<int> v1(16), v2(v1);
+  TVector<int> v1(16);
+  for (int i = 0; i < 16; i++) v1[i] = i;
 
-	EXPECT_EQ(v1, v2);
+  TVector<int> v2(v1);
+
+  EXPECT_EQ(v1, v2);
 }
 
 TEST(TVector, copied_vector_has_its_own_memory)
 {
- TVector<int>*v1 = new TVector<int>(16);
-	TVector<int> v2(*v1);
-	delete v1;
-
-	ASSERT_NO_THROW(v2[15]);
+  TVector<int> v(3);
+  v[0] = 2;
+  v[1] = 3;
+  v[2] = 4;
+  TVector<int> v1(v);
+  v[0]=1;
+	
+  EXPECT_NE(v,v1);
 }
 
 TEST(TVector, can_get_size)
@@ -108,6 +114,7 @@ TEST(TVector, assign_operator_change_vector_size)
 TEST(TVector, can_assign_vectors_of_different_size)
 {
 	TVector<int> v8(8), v16(16);
+	for (int i = 0; i < 16; i++) v8[i] = i;
 	v8 = v16;
 
 	EXPECT_EQ(v8, v16);
@@ -217,6 +224,7 @@ TEST(TVector, can_multiply_vectors_with_equal_size)
 		v1[i] = i;
 	}
 	int res = v * v1;
+	
 	EXPECT_EQ(res, 28);
 }
 

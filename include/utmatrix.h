@@ -123,13 +123,13 @@ bool TVector<ValType>::operator==(const TVector &v) const
 template <class ValType> // сравнение
 bool TVector<ValType>::operator!=(const TVector &v) const
 {
-	return ! ( *this == v )
+	return ! ( *this == v );
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // присваивание
 TVector<ValType>& TVector<ValType>::operator=(const TVector &v)
 {
-	if (*this != &v)
+	if (*this != v)
 	{
 		if (Size != v.Size)
 		{
