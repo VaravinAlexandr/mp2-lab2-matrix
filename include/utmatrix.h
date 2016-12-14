@@ -97,7 +97,7 @@ ValType& TVector<ValType>::operator[](int pos)
 {
 	if ((pos >= StartIndex) && (pos < (Size + StartIndex))) 
 	{
-		return pVector[pos];
+		return pVector[pos-StartIndex];
 	}
 	else throw pos;
 	
